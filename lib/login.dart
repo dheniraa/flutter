@@ -15,9 +15,9 @@ class _LoginPage extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
+      body: Center(
         child: ListView(
+          shrinkWrap: true,
           children: [
             Container(
               alignment: Alignment.center,
@@ -32,27 +32,34 @@ class _LoginPage extends State<LoginPage> {
             ),
             SizedBox(
               height: 50,
-              child: TextField(
-                keyboardType: TextInputType.emailAddress,
-                decoration: InputDecoration(
-                  hintText: "Usename",
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  keyboardType: TextInputType.emailAddress,
+                  decoration: InputDecoration(
+                    hintText: "Usename",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                 ),
               ),
             ),
-            Text(""),
+            SizedBox(
+              height: 10,
+            ),
             SizedBox(
               height: 50,
-              child: TextField(
-                obscureText: !visibilityPass,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  label: Text('Password'),
-                  suffixIcon: IconButton(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: TextField(
+                  obscureText: !visibilityPass,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    labelText: 'Password',
+                    suffixIcon: IconButton(
                       onPressed: () {
                         setState(() {
                           visibilityPass = !visibilityPass;
@@ -60,29 +67,48 @@ class _LoginPage extends State<LoginPage> {
                       },
                       icon: visibilityPass
                           ? Icon(Icons.visibility)
-                          : Icon(Icons.visibility_off)),
+                          : Icon(Icons.visibility_off),
+                    ),
+                  ),
                 ),
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 10,
             ),
-            SizedBox(
-              height: 20,
-              child: RichText(
-                text: TextSpan(
-                    text: "Lupa Password?",
-                    style: TextStyle(color: Colors.blueAccent)),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: SizedBox(
+                  height: 20,
+                  child: RichText(
+                    text: TextSpan(
+                      text: "Lupa Password?",
+                      style: TextStyle(color: Colors.blueAccent),
+                    ),
+                  ),
+                ),
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 10,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("LOGIN"),
-              style: ElevatedButton.styleFrom(
-                fixedSize: Size(150, 35),
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                  );
+                },
+                child: Text("LOGIN"),
+                style: ElevatedButton.styleFrom(
+                  fixedSize: Size(150, 35),
+                ),
               ),
             ),
           ],

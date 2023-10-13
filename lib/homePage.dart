@@ -8,20 +8,38 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePage extends State<HomePage> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   String? selectedValue;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         leading: Image.asset("assets/logo/logo.png"),
-        title: Text("Sains School"),
+        title: Text("Dhera"),
         centerTitle: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu),
-          ),
-        ],
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            UserAccountsDrawerHeader(
+              accountName: Text("Dhenira"),
+              accountEmail: Text("email@gmail.com"),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: AssetImage("assets/avatar.png"),
+              ),
+            ),
+            ListTile(
+              title: Text("Item 1"),
+              onTap: () {},
+            ),
+            ListTile(
+              title: Text("Item 2"),
+              onTap: () {},
+            ),
+          ],
+        ),
       ),
       body: Column(
         children: [
@@ -45,103 +63,105 @@ class _HomePage extends State<HomePage> {
                         ))
                     .toList()),
           ),
-          Container(
-            margin: EdgeInsets.only(left: 20),
-            height: 100,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 115,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color.fromARGB(255, 203, 202, 202)),
-                      child: Center(
-                          child: Text(
-                        "Box 1",
-                        style: TextStyle(color: Colors.black),
-                      )),
+          Column(
+            children: [
+              SizedBox(
+                height: 85,
+                child: ListView.builder(
+                  itemCount: 6,
+                  scrollDirection: Axis.horizontal,
+                  itemBuilder: (context, index) => Container(
+                    height: 50,
+                    width: 115,
+                    margin: EdgeInsets.only(left: 20),
+                    child: Center(
+                      child: Text("Box $index"),
                     ),
+                    color: Color.fromARGB(255, 195, 194, 194),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 115,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color.fromARGB(255, 203, 202, 202)),
-                      child: Center(
-                          child: Text(
-                        "Box 2",
-                        style: TextStyle(color: Colors.black),
-                      )),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: () {},
-                    child: Container(
-                      width: 115,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Color.fromARGB(255, 203, 202, 202)),
-                      child: Center(
-                          child: Text(
-                        "Box 3",
-                        style: TextStyle(color: Colors.black),
-                      )),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
           Align(
             alignment: Alignment.center,
             child: Container(
               child: Card(
+                margin: EdgeInsets.only(top: 115),
                 child: ElevatedButton(
                   onPressed: () {
                     showDialog(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                              title: Text("Judul Dialog"),
-                              content: Text("Isi Dialog"),
-                            ));
+                      context: context,
+                      builder: (context) => Center(
+                        child: Container(
+                          width: 300,
+                          child: AlertDialog(
+                            title: Text("Judul Dialog"),
+                            content: Text("Isi Dialog"),
+                          ),
+                        ),
+                      ),
+                    );
                   },
                   child: Text("Show Dialog"),
                 ),
               ),
             ),
           ),
-          Align(
-            alignment: Alignment.center,
-            child: Container(
-              child: Card(
-                child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text("Judul Snackbar"),
-                        action:
-                            SnackBarAction(label: "Close", onPressed: () {}),
-                      ),
-                    );
-                  },
-                  child: Text("Show Snackbar"),
+          Container(
+            child: Align(
+              alignment: Alignment.center,
+              child: Container(
+                child: Card(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text("Judul Snackbar"),
+                          action:
+                              SnackBarAction(label: "Close", onPressed: () {}),
+                        ),
+                      );
+                    },
+                    child: Text("Show Snackbar"),
+                  ),
                 ),
               ),
             ),
           ),
+          Container(
+            child: Card(
+              child: ElevatedButton(
+                onPressed: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => Container(
+                      height: 175,
+                      width: double.infinity,
+                      color: Colors.white,
+                      child: ListView(
+                        children: [
+                          ListTile(
+                            leading: Icon(Icons.add_outlined),
+                            title: Text("Menu 1"),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.create),
+                            title: Text("Menu 2"),
+                          ),
+                          ListTile(
+                            leading: Icon(Icons.search),
+                            title: Text("Menu 3"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
+                child: Text("Show Bottom Sheet"),
+              ),
+            ),
+          )
         ],
       ),
     );
