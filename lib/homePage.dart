@@ -17,7 +17,7 @@ class _HomePage extends State<HomePage> {
       key: _scaffoldKey,
       appBar: AppBar(
         leading: Image.asset("assets/logo/logo.png"),
-        title: Text("Dhera"),
+        title: Text("Sains School"),
         centerTitle: false,
       ),
       endDrawer: Drawer(
